@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册页面</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+    <!-- https://fonts.google.com/specimen/Open+Sans -->
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="css/tooplate.css">
+
+    <!--javascrpit-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/register.js"></script>
+</head>
+
+<body class="bg03">
+    <div class="container">
+        <div class="row tm-mt-big">
+            <div class="col-12 mx-auto tm-login-col">
+                <div class="bg-white tm-block">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <i class="fas fa-3x fa-tachometer-alt tm-site-icon text-center"></i>
+                            <h2 class="tm-block-title mt-3">注册</h2>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <form class="tm-login-form">
+                                <div class="input-group">
+                                    <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">用户名</label>
+                                    <input name="username" type="text" class="form-control col-xl-9 col-lg-8 col-md-8 col-sm-7" id="username">
+                                </div>
+                                <p style="display: none;color: #ff0001" align="right" id="usernamewarn">用户名已被注册</p>
+                                <div class="input-group mt-3">
+                                    <label for="email" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">注册邮箱</label>
+                                    <input name="email" type="email" class="form-control" id="email"><br/>
+                                </div>
+                                <p style="display: none;color: #ff0001" align="right" id="emailwarn">邮箱格式不正确</p>
+
+                                <div class="input-group mt-3">
+                                    <label for="password" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">密码</label>
+                                    <input name="password" type="password" class="form-control" id="password"><br>
+                                </div>
+                                <p style="display: none;color: #ff0001" align="right" id="pwdwarn">密码不能为空</p>
+                                <div class="input-group mt-3">
+                                    <label for="repassword" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">重复密码</label>
+                                    <input name="repassword" type="password" class="form-control" id="repassword"><br>
+                                </div>
+                                <p style="display: none;color: #ff0001" align="right" id="repwdwarn">两次输入密码不同</p>
+                                <div class="input-group mt-3" id="inviteradiodiv">
+                                    <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">邀请码(选填)</label>
+                                    <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">
+                                        <input type="radio" name="inviteradio" id="inviteradio1" value="有" title="有"/>&nbsp;有
+                                    </label>
+                                    <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">
+                                        <input type="radio" name="inviteradio" id="inviteradio2" value="无" title="无" checked="checked"/>&nbsp;无
+                                    </label>
+                                </div>
+                                <div class="input-group mt-3">
+                                    <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label"></label>
+                                    <input id="invitecode" name="invitecode" type="text" class="form-control" disabled="disabled">
+                                </div>
+
+                                <div class="input-group mt-3">
+                                    <button type="button" id="registerbtn" name="registerbtn" class="btn btn-primary d-inline-block mx-auto">注册</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
