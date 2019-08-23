@@ -12,7 +12,7 @@ public class Member {
     @Id
     @Column(length = 100)
     private String id;
-    @Column(length = 1)
+    @Column(length = 2)
     private String sex;
     @Column(length = 20)
     private String registerDate;

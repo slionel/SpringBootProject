@@ -1,84 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>注册页面</title>
-    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
-    <!-- https://fonts.google.com/specimen/Open+Sans -->
-    <link rel="stylesheet" href="css/fontawesome.min.css">
-    <!-- https://fontawesome.com/ -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- https://getbootstrap.com/ -->
-    <link rel="stylesheet" href="css/tooplate.css">
-
-    <!--javascrpit-->
-    <script src="js/jquery-3.3.1.min.js"></script>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="css/fontastic.css">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <!--<script src="vendor/jquery-validation/jquery.validate.min.js"></script>-->
     <script src="js/register.js"></script>
-</head>
-
-<body class="bg03">
-    <div class="container">
-        <div class="row tm-mt-big">
-            <div class="col-12 mx-auto tm-login-col">
-                <div class="bg-white tm-block">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <i class="fas fa-3x fa-tachometer-alt tm-site-icon text-center"></i>
-                            <h2 class="tm-block-title mt-3">注册</h2>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-12">
-                            <form class="tm-login-form">
-                                <div class="input-group">
-                                    <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">用户名</label>
-                                    <input name="username" type="text" class="form-control col-xl-9 col-lg-8 col-md-8 col-sm-7" id="username">
-                                </div>
-                                <p style="display: none;color: #ff0001" align="right" id="usernamewarn">用户名已被注册</p>
-                                <div class="input-group mt-3">
-                                    <label for="email" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">注册邮箱</label>
-                                    <input name="email" type="email" class="form-control" id="email"><br/>
-                                </div>
-                                <p style="display: none;color: #ff0001" align="right" id="emailwarn">邮箱格式不正确</p>
-
-                                <div class="input-group mt-3">
-                                    <label for="password" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">密码</label>
-                                    <input name="password" type="password" class="form-control" id="password"><br>
-                                </div>
-                                <p style="display: none;color: #ff0001" align="right" id="pwdwarn">密码不能为空</p>
-                                <div class="input-group mt-3">
-                                    <label for="repassword" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">重复密码</label>
-                                    <input name="repassword" type="password" class="form-control" id="repassword"><br>
-                                </div>
-                                <p style="display: none;color: #ff0001" align="right" id="repwdwarn">两次输入密码不同</p>
-                                <div class="input-group mt-3" id="inviteradiodiv">
-                                    <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">邀请码(选填)</label>
-                                    <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">
-                                        <input type="radio" name="inviteradio" id="inviteradio1" value="有" title="有"/>&nbsp;有
-                                    </label>
-                                    <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">
-                                        <input type="radio" name="inviteradio" id="inviteradio2" value="无" title="无" checked="checked"/>&nbsp;无
-                                    </label>
-                                </div>
-                                <div class="input-group mt-3">
-                                    <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label"></label>
-                                    <input id="invitecode" name="invitecode" type="text" class="form-control" disabled="disabled">
-                                </div>
-
-                                <div class="input-group mt-3">
-                                    <button type="button" id="registerbtn" name="registerbtn" class="btn btn-primary d-inline-block mx-auto">注册</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+    <!-- Main File-->
+    <script src="js/front.js"></script>
+  </head>
+  <body>
+    <div class="page login-page">
+      <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+          <div class="row">
+            <!-- Logo & Information Panel-->
+            <div class="col-lg-6">
+              <div class="info d-flex align-items-center">
+                <div class="content">
+                  <div class="logo">
+                    <h1>注册</h1>
+                  </div>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-</body>
+            <!-- Form Panel    -->
+            <div class="col-lg-6 bg-white">
+              <div class="form d-flex align-items-center">
+                <div class="content">
+                  <form class="form-validate">
+                    <div class="form-group">
+                      <input id="username" type="text" name="username" class="input-material" placeholder="用户名">
+                    </div>
+                    <p style="display: none;color: #ff0001" align="right" id="usernamenullwarn">用户名不能为空</p>
+                    <p style="display: none;color: #ff0001" align="right" id="usernamewarn">用户名已被注册</p>
+                    <div class="form-group">
+                      <input id="email" type="email" name="email" class="input-material" placeholder="注册邮箱">
+                      <p style="display: none;color: #ff0001" align="right" id="emailwarn">邮箱格式不正确</p>
+                      <p style="display: none;color: #ff0001" align="right" id="emailnullwarn">邮箱不能为空</p>
+                    </div>
+                    <div class="form-group">
+                      <input id="password" type="password" name="password" class="input-material" placeholder="密码">
+                    </div>
+                    <p style="display: none;color: #ff0001" align="right" id="pwdlengthwarn">密码长度6到20</p>
+                    <p style="display: none;color: #ff0001" align="right" id="pwdwarn">密码不能为空</p>
+                    <div class="form-group">
+                      <input id="repassword" type="password" name="repassword" class="input-material" placeholder="重复密码">
+                    </div>
+                    <p style="display: none;color: #ff0001" align="right" id="repwdwarn">两次输入密码不同</p>
+                      <div class="form-group terms-conditions">
+                          <label>邀请码(选填)</label>&nbsp;&nbsp;<br>
+                          <label>
+                              <input type="radio" name="inviteradio" id="inviteradio1" value="有" title="有"/>&nbsp;有
+                          </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                          <label>
+                              <input type="radio" name="inviteradio" id="inviteradio2" value="无" title="无" checked="checked"/>&nbsp;无
+                          </label>
+                          <input id="invitecode" name="invitecode" type="text" class="form-control" disabled="disabled">
+                      </div>
 
+
+                    <div class="form-group terms-conditions">
+                      <input id="agree" name="agree" type="checkbox" class="checkbox-template">
+                      <label for="agree">同意协议</label>
+                    </div>
+                    <div class="form-group">
+                      <button id="registerbtn" type="button" name="registerbtn" class="btn btn-primary">注册</button>
+                    </div>
+                  </form><small>已有账户？ </small><a href="login.html" class="signup">登录</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyrights text-center">
+        <p>Copyright &copy; 2019.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+      </div>
+    </div>
+  </body>
 </html>

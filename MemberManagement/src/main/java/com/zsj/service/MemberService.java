@@ -5,6 +5,8 @@ import com.zsj.entity.Member;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,5 +34,18 @@ public class MemberService {
 
     public List<Member> findByNameAndPwd(String userName, String pwd){
         return memberRepository.findByUserNameAndPassword(userName, pwd);
+    }
+
+    public void addCookie(String userName, HttpServletResponse response){
+        if(!"".equals(userName)){
+            Cookie cookie = new Cookie("loginName", userName);
+            cookie.setPath("/");
+            cookie.setMaxAge(60*60*24);
+            response.addCookie(cookie);
+        }
+    }
+
+    public Member update(Member member){
+        return memberRepository.save(member);
     }
 }
