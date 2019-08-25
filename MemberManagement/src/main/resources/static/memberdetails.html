@@ -105,6 +105,7 @@
                                 <th>联系人</th>
                                 <th>电话</th>
                                 <th>详细地址</th>
+                                <th>编辑</th>
                               </tr>
                               </thead>
                               <tbody id="addressdetailtbody"></tbody>
@@ -144,6 +145,43 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h4 id="exampleModalLabel" class="modal-title">新增联系地址</h4>
+                  <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                  <div class="col-sm-9">
+                    <label>联系人</label>
+                    <input type="text" class="form-control" id="connector"><br>
+                    <label>电话</label>
+                    <input type="text" class="form-control" id="connectortel"><br>
+                  </div>
+
+                  <div class="col-sm-9">
+                    <label>省</label>
+                    <select id="cmbProvince" name="cmbProvince" class="form-control mb-3"> </select>
+                    <label>市</label>
+                    <select id="cmbCity" name="cmbCity" class="form-control mb-3"></select>
+                    <label>区</label>
+                    <select id="cmbArea" name="cmbArea" class="form-control mb-3"></select>
+                  </div>
+                  <div class="col-sm-9">
+                    <label>详细地址</label>
+                    <textarea id="addressdetail" placeholder="xxx街道 - xxx号 - xxx室"></textarea>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">关闭</button>
+                  <button type="button" class="btn btn-primary" id="addressdetailbtn">保存</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--编辑联系地址模态框主体-->
+          <div id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+            <div role="document" class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 id="editaddressdetailtitle" class="modal-title">新增联系地址</h4>
                   <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">

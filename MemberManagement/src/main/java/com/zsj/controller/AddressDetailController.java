@@ -4,13 +4,13 @@ import com.zsj.entity.AddressDetail;
 import com.zsj.service.AddressDetailService;
 import com.zsj.utils.Keyutils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -31,5 +31,14 @@ public class AddressDetailController {
             map.put("rs","false");
         }
         return map;
+    }
+
+    @RequestMapping("getaddressdetail")
+    @ResponseBody
+    public List<AddressDetail> getAddressDetail(HttpServletRequest request){
+        String userId = request.getParameter("userId");
+        List<AddressDetail> addressDetailList = new ArrayList<AddressDetail>();
+        addressDetailList = addressDetailService.getAddressDetailById(userId);
+        return addressDetailList;
     }
 }

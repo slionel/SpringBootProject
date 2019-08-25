@@ -10,7 +10,6 @@ $(document).ready(function () {
     var registerdate;
     var address;
 
-
     //获取登录名
     $.ajax({
         type:"POST",
@@ -18,7 +17,6 @@ $(document).ready(function () {
         dataType:"json",
         success:function (json) {
             username = json.loginUserName;
-            console.log(username);
 
             //通过登录名获取所有值
             $.getJSON("mc/getallbyname",{userName:username},function (data) {
@@ -75,8 +73,15 @@ $(document).ready(function () {
                     });
 
                 });
-
                 //结束修改数据库中数据
+
+
+                getdata();
+
+
+
+
+
             });
 
             $("#addressdetailbtn").click(function () {
@@ -99,6 +104,7 @@ $(document).ready(function () {
                     data:data,
                     success:function (add) {
                         if(add.rs == "true"){
+                            getdata();
                             alert("保存成功");
                             $("#myModal").modal("hide");
                             $('.modal-backdrop').remove();
@@ -106,7 +112,25 @@ $(document).ready(function () {
                     }
                 });
             });
-
         }
     });
+
+    //获取数据库中地址信息
+    function getdata(){
+        $.getJSON("ac/getaddressdetail",{userId:id},function (json) {
+            console.log("getdata方法：："+json);
+            $("#addressdetailtbody").empty();
+            for(var i = 0; i < json.length; i++){
+                $("#addressdetailtbody").append(
+                    "<tr>" +
+                    "<td>"+json[i].connector+"</td>" +
+                    "<td>"+json[i].tel+"</td>" +
+                    "<td>"+json[i].address+"</td>" +
+                    "<td><button type='button' data-toggle='modal' data-target='#editModal' class='btn btn-primary' id='btn"+json[0].id+"'>编辑</button></td>" +
+                    "</tr>"
+                );
+            }
+
+        });
+    }
 });

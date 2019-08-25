@@ -5,6 +5,7 @@ import com.zsj.repository.AddressDetailRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class AddressDetailService {
@@ -13,5 +14,9 @@ public class AddressDetailService {
 
     public AddressDetail addAddressDetail(AddressDetail addressDetail){
         return addressDetailRepository.save(addressDetail);
+    }
+
+    public List<AddressDetail> getAddressDetailById(String userId){
+        return addressDetailRepository.findByUserId(userId);
     }
 }
