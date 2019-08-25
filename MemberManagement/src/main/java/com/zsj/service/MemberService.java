@@ -1,5 +1,6 @@
 package com.zsj.service;
 
+import com.zsj.entity.AddressDetail;
 import com.zsj.repository.MemberRepository;
 import com.zsj.entity.Member;
 import org.springframework.stereotype.Service;
@@ -48,4 +49,5 @@ public class MemberService {
     public Member update(Member member){
         return memberRepository.save(member);
     }
+
 }

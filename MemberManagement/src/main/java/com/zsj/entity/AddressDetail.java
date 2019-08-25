@@ -13,9 +13,18 @@ public class AddressDetail {
     @Column(length = 50)
     private String id;
     private String userId;
+    private String connector;
     @Column(length = 15)
     private String tel;
     private String address;
+
+    public String getConnector() {
+        return connector;
+    }
+
+    public void setConnector(String connector) {
+        this.connector = connector;
+    }
 
     public String getId() {
         return id;

@@ -1,6 +1,7 @@
 package com.zsj.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zsj.entity.AddressDetail;
 import com.zsj.entity.Member;
 import com.zsj.model.AjaxResponse;
 import com.zsj.model.Cookies;
@@ -108,7 +109,6 @@ public class MemberController {
         String email = request.getParameter("email");
         String invitecode = request.getParameter("invitecode");
         String registerdate = request.getParameter("registerdate");
-        String address = request.getParameter("address");
         String password = request.getParameter("password");
         Member member = new Member();
         member.setUserName(userName);
@@ -118,7 +118,6 @@ public class MemberController {
         member.setEmail(email);
         member.setInviteCode(invitecode);
         member.setRegisterDate(registerdate);
-        member.setAddress(address);
         member.setPassword(password);
         if(memberService.update(member) != null){
             map.put("rs","true");
@@ -128,4 +127,5 @@ public class MemberController {
         }
         return map;
     }
+
 }

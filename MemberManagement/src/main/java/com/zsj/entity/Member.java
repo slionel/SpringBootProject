@@ -22,7 +22,6 @@ public class Member {
     private String inviteCode;
     @Column(length = 15)
     private String tel;
-    private String address;
     private String password;
     private String userName;
 
@@ -32,14 +31,6 @@ public class Member {
 
     public void setTel(String tel) {
         this.tel = tel;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPassword() {
