@@ -3,7 +3,7 @@ package com.zsj.DTO;
 /**
  * @author zsj55
  */
-public class AddressDetailDTO {
+public class LoginDTO {
     private String baseUsername;
     private String basePassword;
     private boolean rememberMe;

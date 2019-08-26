@@ -1,7 +1,7 @@
 package com.zsj.controller;
 
 
-import com.zsj.DTO.AddressDetailDTO;
+import com.zsj.DTO.LoginDTO;
 import com.zsj.entity.Member;
 import com.zsj.entity.ResponseBo;
 import com.zsj.service.MemberService;
@@ -37,10 +37,10 @@ public class LoginController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseBo login(AddressDetailDTO addressDetailDTO) {
-        String password = MD5Utils.encrypt(addressDetailDTO.getBaseUsername(), addressDetailDTO.getBasePassword());
+    public ResponseBo login(LoginDTO loginDTO) {
+        String password = MD5Utils.encrypt(loginDTO.getBaseUsername(), loginDTO.getBasePassword());
         System.out.println("login::"+password);
-        UsernamePasswordToken token = new UsernamePasswordToken(addressDetailDTO.getBaseUsername(), password, addressDetailDTO.isRememberMe());
+        UsernamePasswordToken token = new UsernamePasswordToken(loginDTO.getBaseUsername(), password, loginDTO.isRememberMe());
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
