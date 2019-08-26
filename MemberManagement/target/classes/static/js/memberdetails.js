@@ -3,6 +3,7 @@ $(document).ready(function () {
     var username="";
     var sex;
     var tel;
+    //id 地址详情id
     var id;
     var password;
     var email;
@@ -29,6 +30,9 @@ $(document).ready(function () {
                 //开始在页面显示数据库中数据
                 $("#username").val(data[0].userName);
 
+                //显示我的邀请码
+                $("#myinvitecode").text(invitecode);
+
                 if(data[0].sex == "男"){
                     $("#male").attr("selected","selected");
                     $("#female").removeAttr("selected");
@@ -48,8 +52,8 @@ $(document).ready(function () {
                 $("#tel").val(data[0].tel);
                 //结束显示页面数据库中数据
 
+                //开始修改数据库中数据
                 $("#submitbtn").click(function () {
-                    //开始修改数据库中数据
                     if($("#male").is(":checked")){
                         sex = "男";
                     }
@@ -77,10 +81,6 @@ $(document).ready(function () {
 
 
                 getdata();
-
-
-
-
 
             });
 
@@ -115,10 +115,12 @@ $(document).ready(function () {
         }
     });
 
-    //获取数据库中地址信息
+
+
+
+    //按照userId获取数据库中地址信息
     function getdata(){
         $.getJSON("ac/getaddressdetail",{userId:id},function (json) {
-            console.log("getdata方法：："+json);
             $("#addressdetailtbody").empty();
             for(var i = 0; i < json.length; i++){
                 $("#addressdetailtbody").append(
@@ -126,10 +128,43 @@ $(document).ready(function () {
                     "<td>"+json[i].connector+"</td>" +
                     "<td>"+json[i].tel+"</td>" +
                     "<td>"+json[i].address+"</td>" +
-                    "<td><button type='button' data-toggle='modal' data-target='#editModal' class='btn btn-primary' name='editaddressdetailbtn' id='btn"+json[0].id+"'>编辑</button></td>" +
+                    "<td><button type='button' data-toggle='modal' data-target='#editModal' class='btn btn-primary' name='editaddressdetailbtn' id='btn"+json[i].id+"'>编辑</button></td>" +
+                    "<td><button type='button' class='btn btn-danger' name='deladdressdetailbtn' id='delbtn"+json[i].id+"'>删除</button></td>" +
                     "</tr>"
                 );
             }
+            $("button[name='editaddressdetailbtn']").click(function () {
+                //通过联系地址详情id寻找对应数据并显示在模态框中
+                var btnid = this.id;
+                var addressId = btnid.substr(3);
+                $.getJSON("ac/getaddressdetailbyaddressid",{addressId:addressId},function (json) {
+                    $("#editconnector").val(json.connector);
+                    $("#editconnectortel").val(json.tel);
+                    $("#editaddress").val(json.address);
+                });
+
+                $("#saveaddressdetailbtn").click(function () {
+                    $.getJSON("ac/updateaddressdetail",{addressId:addressId,tel:$("#editconnectortel").val(),connector:$("#editconnector").val(),address:$("#editaddress").val()},function (json) {
+                        if(json.rs == 1){
+                            alert("修改成功");
+                            getdata();
+                            $("#editModal").modal("hide");
+                            $('.modal-backdrop').remove();
+                        }
+                    });
+                });
+            });
+
+            $("button[name='deladdressdetailbtn']").click(function () {
+                var btnid = this.id;
+                var addressId = btnid.substr(6);
+                $.get("ac/deleteaddressdetail?addressId="+addressId,function (json) {
+                    if(json.rs == 1){
+                        alert("删除成功");
+                        getdata();
+                    }
+                });
+            });
 
         });
     }

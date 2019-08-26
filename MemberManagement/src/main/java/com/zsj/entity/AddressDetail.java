@@ -11,6 +11,9 @@ import javax.persistence.Id;
 public class AddressDetail {
     @Id
     @Column(length = 50)
+    /**
+     * id为详细地址id
+     */
     private String id;
     private String userId;
     private String connector;

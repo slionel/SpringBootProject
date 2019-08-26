@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AddressDetailService {
@@ -18,5 +19,17 @@ public class AddressDetailService {
 
     public List<AddressDetail> getAddressDetailById(String userId){
         return addressDetailRepository.findByUserId(userId);
+    }
+
+    public Optional<AddressDetail> getAddressDetailByAddressId(String addressId){
+        return addressDetailRepository.findById(addressId);
+    }
+
+    public int updateAddressDetail(String id, String tel, String connector, String address){
+        return addressDetailRepository.updateAddressDetail(address,tel,connector,id);
+    }
+
+    public int deleteAddressDetail(String id){
+        return addressDetailRepository.deleteAddressDetail(id);
     }
 }
