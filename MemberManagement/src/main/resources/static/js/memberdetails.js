@@ -14,10 +14,12 @@ $(document).ready(function () {
     //获取登录名
     $.ajax({
         type:"POST",
-        url:"mc/getcookie",
+        url:"getlogin",
         dataType:"json",
         success:function (json) {
-            username = json.loginUserName;
+            console.log("=================")
+            console.log(json);
+            username = json.userName;
 
             //通过登录名获取所有值
             $.getJSON("mc/getallbyname",{userName:username},function (data) {
@@ -29,9 +31,6 @@ $(document).ready(function () {
                 registerdate = data[0].registerDate;
                 //开始在页面显示数据库中数据
                 $("#username").val(data[0].userName);
-
-                //显示我的邀请码
-                $("#myinvitecode").text(invitecode);
 
                 if(data[0].sex == "男"){
                     $("#male").attr("selected","selected");

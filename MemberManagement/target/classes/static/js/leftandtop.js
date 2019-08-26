@@ -1,15 +1,20 @@
 $(document).ready(function () {
     //设置页面用户名显示
+    /*$.post("getlogin",function (data) {
+        console.log(data);
+        $("#loginusername").text(data.userName);
+    },"json");*/
+
     $.ajax({
         type:"POST",
-        url:"mc/getcookie",
+        url:"getlogin",
         dataType:"json",
         success:function (json) {
-            var username = json.loginUserName;
-            console.log(username);
-            $("#loginusername").text(username);
+            console.log("leftandtop::::"+json);
+            $("#loginusername").text(json.userName);
         }
     });
+
 
 
     $("#main").load("index.html");

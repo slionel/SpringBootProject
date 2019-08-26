@@ -61,12 +61,6 @@ public class LoginController {
         return "redirect:/index";
     }
 
-    @RequestMapping("/index")
-    public String index(Model model) {
-        Member member = (Member) SecurityUtils.getSubject().getPrincipal();
-        model.addAttribute("member", member);
-        return "index.html";
-    }
 
 
     @PostMapping("/getUser")
@@ -77,6 +71,12 @@ public class LoginController {
         map.put("username",member.getUserName());
 //        map.put("user")
         return map;
+    }
+
+    @PostMapping("/getlogin")
+    @ResponseBody
+    public Member getLoginUser(){
+        return (Member) SecurityUtils.getSubject().getPrincipal();
     }
 
 }
