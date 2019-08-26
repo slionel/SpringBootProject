@@ -4,15 +4,21 @@ $(document).ready(function () {
         var password = $("#password").val();
         var baseUsername = username;
         var basePassword = password;
-        console.log(baseUsername);
-        console.log(basePassword);
-        $.getJSON("mc/login",{baseUsername:baseUsername,basePassword:basePassword},function(json){
-            console.log(json);
-            if(json.rs == "true"){
+        var rememberMe;
+        if($("#remembersel").is(":checked")){
+            rememberMe = true;
+        }
+        else {
+            rememberMe = false;
+        }
+
+
+        $.post("login",{baseUsername:baseUsername,basePassword:basePassword,rememberMe:rememberMe},function(json){
+            if(json.code == 0){
                 window.location.href="leftandtop.html";
             }
-            else {
-                alert("用户名或密码不正确");
+            else{
+                alert("用户名或密码错误");
                 window.location.href="login.html";
             }
         });

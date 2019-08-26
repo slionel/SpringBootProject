@@ -1,20 +1,18 @@
 package com.zsj.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zsj.entity.AddressDetail;
 import com.zsj.entity.Member;
 import com.zsj.model.AjaxResponse;
 import com.zsj.model.Cookies;
 import com.zsj.service.MemberService;
 import com.zsj.utils.GetCharAndNumber;
 import com.zsj.utils.Keyutils;
-import com.zsj.utils.MD5Util;
+import com.zsj.utils.MD5Utils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -31,7 +29,9 @@ public class MemberController {
     public AjaxResponse register(@RequestParam String baseUsername, @RequestParam String baseEmail, @RequestParam String basePassword ){
         String inviteCode = GetCharAndNumber.getCharAndNumr(50);
         System.out.println("register，password:"+basePassword);
-        String password = MD5Util.string2MD5(basePassword);
+        String password = MD5Utils.encrypt(baseUsername,basePassword);
+        System.out.println(baseUsername);
+        System.out.println(password);
         String email = baseEmail;
         String registerDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         Member member = new Member();
@@ -59,19 +59,6 @@ public class MemberController {
         return map;
     }
 
-    @RequestMapping("login")
-    public Map login(@RequestParam String baseUsername, @RequestParam String basePassword, HttpServletResponse response){
-        Map map = new HashMap();
-        memberService.addCookie(baseUsername,response);
-        String password = MD5Util.string2MD5(basePassword);
-        if(memberService.findByNameAndPwd(baseUsername,password).size() != 0){
-            map.put("rs","true");
-        }
-        else{
-            map.put("rs","false");
-        }
-        return map;
-    }
 
     @PostMapping("getcookie")
     public String getCookie(HttpServletRequest request){

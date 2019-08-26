@@ -6,6 +6,12 @@ $(document).ready(function () {
     var invitecode;
 
     $("#registerbtn").click(function(){
+        invitecode = $("#invitecode").val();
+        console.log("username::"+username);
+        console.log("email::"+email);
+        console.log("password::"+password);
+        console.log("repassword::"+repassword);
+        console.log("invitecode::"+invitecode);
         if(username.length == 0 || username == null || username == undefined || username == ""){
             $("#registerbtn").attr("disabled","none");
         }
@@ -22,14 +28,8 @@ $(document).ready(function () {
             $("#registerbtn").attr("disabled","none");
         }
 
-        //base64加密
-        var baseUsername = username;
-        var basePassword = password;
-        var baseEmail = email;
 
-        invitecode = $("#invitecode").val();
-
-        $.getJSON("mc/register",{baseUsername:baseUsername,inviteCode:invitecode,baseEmail:baseEmail,basePassword:basePassword},function (json) {
+        $.getJSON("mc/register",{baseUsername:username,inviteCode:invitecode,baseEmail:email,basePassword:password},function (json) {
             console.log(json);
             if(json.message == "success"){
                 window.location.href = "login.html";

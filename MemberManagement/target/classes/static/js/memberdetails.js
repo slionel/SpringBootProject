@@ -126,7 +126,7 @@ $(document).ready(function () {
                     "<td>"+json[i].connector+"</td>" +
                     "<td>"+json[i].tel+"</td>" +
                     "<td>"+json[i].address+"</td>" +
-                    "<td><button type='button' data-toggle='modal' data-target='#editModal' class='btn btn-primary' id='btn"+json[0].id+"'>编辑</button></td>" +
+                    "<td><button type='button' data-toggle='modal' data-target='#editModal' class='btn btn-primary' name='editaddressdetailbtn' id='btn"+json[0].id+"'>编辑</button></td>" +
                     "</tr>"
                 );
             }

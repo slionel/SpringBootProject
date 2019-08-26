@@ -37,14 +37,6 @@ public class MemberService {
         return memberRepository.findByUserNameAndPassword(userName, pwd);
     }
 
-    public void addCookie(String userName, HttpServletResponse response){
-        if(!"".equals(userName)){
-            Cookie cookie = new Cookie("loginName", userName);
-            cookie.setPath("/");
-            cookie.setMaxAge(60*60*24);
-            response.addCookie(cookie);
-        }
-    }
 
     public Member update(Member member){
         return memberRepository.save(member);
