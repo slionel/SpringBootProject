@@ -38,8 +38,19 @@ public class MemberService {
     }
 
 
-    public Member update(Member member){
-        return memberRepository.save(member);
+    public int update(String tel, String sex, String id){
+        return memberRepository.updateMemberDetail(tel, sex, id);
     }
 
+    public Member findByInviteCode(String inviteCode){
+        return memberRepository.findByInviteCode(inviteCode);
+    }
+
+    public int updateMemberGrade(int grade, String id){
+        return memberRepository.updateMemberGrade(grade, id);
+    }
+
+    public int updateMemberInviterId(String inviterId, String id){
+        return memberRepository.updateMemberInviterId(inviterId,id);
+    }
 }

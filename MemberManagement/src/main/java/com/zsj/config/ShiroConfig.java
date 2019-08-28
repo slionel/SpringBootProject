@@ -41,6 +41,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/address/addAddress", "anon");
         filterChainDefinitionMap.put("/address/showAddress", "anon");
         filterChainDefinitionMap.put("/address/deleteAddress", "anon");
+        filterChainDefinitionMap.put("/mc/**", "anon");
         filterChainDefinitionMap.put("/register.html", "anon");
         filterChainDefinitionMap.put("/mc/register", "anon");
         filterChainDefinitionMap.put("/login", "anon");

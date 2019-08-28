@@ -25,6 +25,26 @@ public class Member implements Serializable {
     private String tel;
     private String password;
     private String userName;
+    @Column(length = 5)
+    private int grade;
+    private String inviterId;
+
+
+    public String getInviterId() {
+        return inviterId;
+    }
+
+    public void setInviterId(String inviterId) {
+        this.inviterId = inviterId;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
 
     public String getTel() {
         return tel;

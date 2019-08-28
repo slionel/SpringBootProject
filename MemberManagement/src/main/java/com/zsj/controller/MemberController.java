@@ -26,12 +26,9 @@ public class MemberController {
     MemberService memberService;
 
     @RequestMapping("register")
-    public AjaxResponse register(@RequestParam String baseUsername, @RequestParam String baseEmail, @RequestParam String basePassword ){
+    public AjaxResponse register(@RequestParam String baseUsername, @RequestParam String baseEmail, @RequestParam String basePassword, @RequestParam int grade, @RequestParam String inviterId ){
         String inviteCode = GetCharAndNumber.getCharAndNumr(50);
-        System.out.println("register，password:"+basePassword);
         String password = MD5Utils.encrypt(baseUsername,basePassword);
-        System.out.println(baseUsername);
-        System.out.println(password);
         String email = baseEmail;
         String registerDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         Member member = new Member();
@@ -41,6 +38,8 @@ public class MemberController {
         member.setRegisterDate(registerDate);
         member.setUserName(baseUsername);
         member.setPassword(password);
+        member.setGrade(grade);
+        member.setInviterId(inviterId);
         memberService.register(member);
         return AjaxResponse.success(member);
     }
@@ -60,24 +59,6 @@ public class MemberController {
     }
 
 
-    @PostMapping("getcookie")
-    public String getCookie(HttpServletRequest request){
-        String loginUserName = null;
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null){
-            for(int i = 0; i < cookies.length; i++){
-                Cookie cookie = cookies[i];
-                if("loginName".equals(cookie.getName())){
-                    loginUserName = cookie.getValue();
-                }
-            }
-        }
-        Cookies cookies1 = new Cookies();
-        cookies1.setLoginUserName(loginUserName);
-        String s = JSONObject.toJSONString(cookies1);
-        return s;
-    }
-
     @GetMapping("getallbyname")
     public List<Member> findAllByName(HttpServletRequest request){
         String userName = request.getParameter("userName");
@@ -92,27 +73,26 @@ public class MemberController {
         String id = request.getParameter("id");
         String sex = request.getParameter("sex");
         String tel = request.getParameter("tel");
-        String userName = request.getParameter("username");
-        String email = request.getParameter("email");
-        String invitecode = request.getParameter("invitecode");
-        String registerdate = request.getParameter("registerdate");
-        String password = request.getParameter("password");
-        Member member = new Member();
-        member.setUserName(userName);
-        member.setId(id);
-        member.setTel(tel);
-        member.setSex(sex);
-        member.setEmail(email);
-        member.setInviteCode(invitecode);
-        member.setRegisterDate(registerdate);
-        member.setPassword(password);
-        if(memberService.update(member) != null){
-            map.put("rs","true");
-        }
-        else{
-            map.put("rs","false");
-        }
+        int num = memberService.update(tel, sex, id);
+        map.put("rs",num);
         return map;
     }
 
+    @GetMapping("findbyinvitecodeval")
+    public Member findByInviteCodeVal (@RequestParam("invitecodeval") String inviteCodeVal){
+        return memberService.findByInviteCode(inviteCodeVal);
+    }
+
+    @GetMapping("updatemembergrade")
+    public void updateMemberGrade(@RequestParam("id") String id, @RequestParam("grade") int grade){
+        memberService.updateMemberGrade(grade, id);
+    }
+
+    @GetMapping("updatememberinviterid")
+    public Map updateMemberInviterId(@RequestParam("id") String id, @RequestParam("inviterId") String inviterId){
+        Map map = new HashMap();
+        int num = memberService.updateMemberInviterId(inviterId, id);
+        map.put("rs",num);
+        return map;
+    }
 }

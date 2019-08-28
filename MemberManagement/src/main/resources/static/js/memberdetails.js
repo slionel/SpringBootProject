@@ -3,13 +3,15 @@ $(document).ready(function () {
     var username="";
     var sex;
     var tel;
-    //id 地址详情id
+    //id是userId
     var id;
     var password;
     var email;
     var invitecode;
     var registerdate;
     var address;
+    var grade;
+    var inviterId;
 
     //获取登录名
     $.ajax({
@@ -17,8 +19,6 @@ $(document).ready(function () {
         url:"getlogin",
         dataType:"json",
         success:function (json) {
-            console.log("=================")
-            console.log(json);
             username = json.userName;
 
             //通过登录名获取所有值
@@ -29,8 +29,11 @@ $(document).ready(function () {
                 email = data[0].email;
                 invitecode = data[0].inviteCode;
                 registerdate = data[0].registerDate;
+                grade = data[0].grade;
+                inviterId = data[0].inviterId;
                 //开始在页面显示数据库中数据
                 $("#username").val(data[0].userName);
+                $("#myinvitecode").text(invitecode);
 
                 if(data[0].sex == "男"){
                     $("#male").attr("selected","selected");
@@ -65,8 +68,8 @@ $(document).ready(function () {
                     username = $("#username").val();
                     tel = $("#tel").val();
 
-                    $.getJSON("mc/update",{password:password, id:id,sex:sex,tel:tel,username:username,email:email,invitecode:invitecode,registerdate:registerdate},function (update) {
-                        if(update.rs == "true"){
+                    $.getJSON("mc/update",{id:id,sex:sex,tel:tel},function (update) {
+                        if(update.rs == "1"){
                             alert("修改成功");
                             window.location.href="leftandtop.html";
                         }
@@ -78,8 +81,39 @@ $(document).ready(function () {
                 });
                 //结束修改数据库中数据
 
-
                 getdata();
+
+
+                //判断是否已经填写过邀请码
+                if(inviterId.length != 0 && inviterId != ""){
+                    $("#writeinvitecode").val("邀请码只能输入一次");
+                    $("#writeinvitecode").attr("disabled","disabled");
+                    $("#coderesetbtn").attr("disabled","disabled");
+                    $("#codesubmitbtn").attr("disabled","disabled");
+                }
+                else{
+                    $("#codesubmitbtn").click(function () {
+                        var writeInviteCode = $("#writeinvitecode").val();
+                        $.get("mc/findbyinvitecodeval?invitecodeval="+writeInviteCode,function (json) {
+                            console.log(json);
+                            inviterId = json.id;
+                            $.get("mc/updatememberinviterid?inviterId="+inviterId+"&id="+id,function (json) {
+                                if(json.rs == 1){
+                                    alert("邀请码添加成功");
+                                    $.get("mc/findbyinvitecodeval?invitecodeval="+writeInviteCode,function (json) {
+                                        inviterId = json.id;
+                                        var inviterGrade = json.grade + 1;
+                                        $.get("mc/updatemembergrade?id="+inviterId+"&grade="+inviterGrade,function (json){
+
+                                        });
+                                    });
+                                }
+                            });
+                        });
+                    });
+                }
+
+
 
             });
 
@@ -154,9 +188,11 @@ $(document).ready(function () {
                 });
             });
 
+            //删除详细地址信息
             $("button[name='deladdressdetailbtn']").click(function () {
                 var btnid = this.id;
                 var addressId = btnid.substr(6);
+
                 $.get("ac/deleteaddressdetail?addressId="+addressId,function (json) {
                     if(json.rs == 1){
                         alert("删除成功");

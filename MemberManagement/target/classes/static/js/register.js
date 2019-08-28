@@ -4,14 +4,10 @@ $(document).ready(function () {
     var password;
     var repassword;
     var invitecode;
+    var grade;
+    var inviterId;
 
     $("#registerbtn").click(function(){
-        invitecode = $("#invitecode").val();
-        console.log("username::"+username);
-        console.log("email::"+email);
-        console.log("password::"+password);
-        console.log("repassword::"+repassword);
-        console.log("invitecode::"+invitecode);
         if(username.length == 0 || username == null || username == undefined || username == ""){
             $("#registerbtn").attr("disabled","none");
         }
@@ -29,7 +25,7 @@ $(document).ready(function () {
         }
 
 
-        $.getJSON("mc/register",{baseUsername:username,inviteCode:invitecode,baseEmail:email,basePassword:password},function (json) {
+        $.getJSON("mc/register",{baseUsername:username,inviteCode:invitecode,baseEmail:email,basePassword:password,grade:grade, inviterId:inviterId},function (json) {
             console.log(json);
             if(json.message == "success"){
                 window.location.href = "login.html";
@@ -114,11 +110,31 @@ $(document).ready(function () {
     $("input[name='inviteradio']").click(function(){
         if($("input[name='inviteradio'][type='radio']:checked").val() == "有"){
             $("#invitecode").removeAttr("disabled");
+            $("#invitecode").blur(function () {
+                var invitecodeval = $("#invitecode").val();
+                $.get("mc/findbyinvitecodeval?invitecodeval="+invitecodeval,function (json) {
+                    grade = 1;
+                    inviterId = json.id;
+                    var inviterGrade = json.grade + 1;
+                    $.get("mc/updatemembergrade?id="+inviterId+"&grade="+inviterGrade,function (json){
+
+                    });
+                });
+            });
+
         }
         else if ($("input[name='inviteradio'][type='radio']:checked").val() == "无"){
+            grade = 1;
             $("#invitecode").attr("disabled","disabled");
+            inviterId = null;
         }
     });
+
+    if ($("input[name='inviteradio'][type='radio']:checked").val() == "无"){
+        grade = 1;
+        $("#invitecode").attr("disabled","disabled");
+        inviterId = null;
+    }
 
 
 });
